@@ -1,0 +1,23 @@
+@import "../../styles/variables";
+
+.home {
+  background-color: $light;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .homeContainer {
+    background-color: lightblue;
+    width: calc(100% - 13.375rem);
+    height: calc(100% - 8.5rem);
+    display: grid;
+    grid-template-areas: "heading heading heading heading" "daily daily daily aside" "session spiderWeb score aside";
+    .chartsContainer {
+      .daily {
+        grid-area: daily;
+      }
+      .session {
+        grid-area: session;
+      }
+    }
+  }
+}
