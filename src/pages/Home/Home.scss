@@ -6,35 +6,78 @@
   align-items: center;
   justify-content: center;
   .homeContainer {
-    // background-color: lightblue;
-    width: calc(100% - 13.375rem);
-    height: calc(100% - 8.5rem);
+    width: calc(100% - 12.5rem);
+    height: calc(100% - 9rem);
+    margin-top: -2.5rem;
+    margin-right: -1.25rem;
     display: grid;
+    row-gap: 3.5rem;
     grid-template-areas: "containerHeading containerHeading containerHeading containerHeading" "chartsContainer chartsContainer chartsContainer aside" "chartsContainer chartsContainer chartsContainer aside";
     grid-template-rows: auto 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+    position: relative;
+    .containerHeading {
+      grid-area: containerHeading;
+      p {
+        &:first-child {
+        margin-top: 0;
+        margin-bottom: 2rem;
+        font-size: 3rem;
+        font-weight: 500;
+      }
+      }
+      span {
+        color: $primary;
+      }
+    }
+    .spinnerContainer {
+      width: 100%;
+      position: absolute;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .loadingSpinner {
+        width: 20rem;
+        height: 20rem;
+        border: 10px solid #f3f3f3;
+        border-top: 10px solid $primary;
+        border-radius: 50%;
+        animation: spinner 1.5s linear infinite;
+      }
+    }
     .chartsContainer {
       grid-area: chartsContainer;
       display: grid;
-      grid-template-areas: "daily daily daily" "session spiderWeb score";
-
-      .daily {
-        grid-area: daily;
+      grid-template-rows: 1fr 16.5rem;
+      grid-template-columns: 1fr 1fr 1fr;
+      column-gap: 1.875rem;
+      row-gap: 2rem;
+      grid-template-areas: "activityChart activityChart activityChart" "sessionChart performanceChart scoreChart";
+      .activityChart {
+        grid-area: activityChart;
       }
-      .session {
-        grid-area: session;
-        background-color: red;
+      .sessionChart {
+        grid-area: sessionChart;
       }
-      .spiderWeb {
-        background-color: grey;
-        grid-area: spiderWeb;
+      .performanceChart {
+        grid-area: performanceChart;
       }
-      .score {
-        grid-area: score;
+      .scoreChart {
+        grid-area: scoreChart;
       }
     }
-    .aside {
+    .asideContent {
       grid-area: aside;
     }
+  }
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
