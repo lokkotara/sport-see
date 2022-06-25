@@ -18,6 +18,7 @@ root.render(
       <NavBar side="left" />
       <Routes>
         <Route path="/user/:id" element={<Home />} />
+        <Route path="/error" element={<Error />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </Router>

@@ -10,7 +10,7 @@ import {
 import { store } from "../../providers/Store";
 
 export default function PerformanceChart() {
-  const kind = store.get.USER_PERFORMANCE.kind;
+  // const kind = store.get.USER_PERFORMANCE.kind;
 
   function customTick({ payload, x, y, textAnchor, stroke, radius }) {
     return (
@@ -25,7 +25,7 @@ export default function PerformanceChart() {
           textAnchor={textAnchor}
         >
           <tspan x={x} dy="0.25em">
-            {kind[payload.value]}
+            {payload.value}
           </tspan>
         </text>
       </g>

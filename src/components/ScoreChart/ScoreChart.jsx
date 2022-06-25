@@ -10,9 +10,10 @@ import {
 import { store } from "../../providers/Store";
 
 export default function ScoreChart() {
-
+const score = store.get.USER_MAIN_DATA.todayScore;
   return (
     <div style={{ width: "100%" }} className="scoreChart">
+        {/* <div>{score}</div> */}
       <ResponsiveContainer width="100%" height="100%">
         <RadialBarChart
           width={730}

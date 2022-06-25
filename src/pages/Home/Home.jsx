@@ -1,29 +1,24 @@
 import "./Home.scss";
 import { StoreContext } from "../../providers/Store";
-import React, { useState,useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { getUserActivity, getUserInfos, getUserPerformance, getUserSessions } from "../../services/actions";
-import  ActivityChart  from "../../components/ActivityChart/ActivityChart";
+import React, { useState, useEffect } from "react";
+import { Navigate, useParams } from "react-router-dom";
+import { getAllData } from "../../services/actions";
+import ActivityChart from "../../components/ActivityChart/ActivityChart";
 import SessionChart from "../../components/SessionChart/SessionChart";
 import ScoreChart from "../../components/ScoreChart/ScoreChart";
 import PerformanceChart from "../../components/PerformanceChart/PerformanceChart";
 
 export default function Home() {
-
-  const {id} = useParams();
-  const store =  React.useContext(StoreContext)[0];
-  const [isLoading, setIsLoading] = useState(true);
+  const { id } = useParams();
+  const store = React.useContext(StoreContext)[0];
 
   useEffect(() => {
-    const getAllDatas = async function(id){
-      await getUserSessions(id);
-      await getUserActivity(id);
-      await getUserInfos(id);
-      await getUserPerformance(id);
-      setIsLoading(false);
-    } 
-  getAllDatas(id);
-  }, [id]);
+    if (!store.isLoading && !store.USER_MAIN_DATA.todayScore) {
+      getAllData(id);
+    }
+  }, [id, store]);
+
+  if (store.error) return <Navigate to="/error" />;
 
   function showCharts() {
     return (
@@ -39,7 +34,9 @@ export default function Home() {
   function showHeader() {
     return (
       <div className="containerHeading">
-        <p>Bonjour<span> {store.USER_MAIN_DATA.userInfos.firstName}</span></p>
+        <p>
+          Bonjour<span> {store.USER_MAIN_DATA.userInfos.firstName}</span>
+        </p>
         <p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
       </div>
     );
@@ -62,11 +59,54 @@ export default function Home() {
     );
   }
 
+  function showKeyDatas() {
+    return (
+      <React.Fragment>
+        <article className="infosCardContainer">
+          <div className="infosCardImgContainer caloriesImg">
+            <img src="/images/icons/calories.svg" alt="" />
+          </div>
+          <div className="infosCardTxtContainer">
+            <div className="infosCartTxtValue">{store.USER_MAIN_DATA.keyData.calorieCount}kCal</div>
+            <div className="infosCardTxtCategory">Calories</div>
+          </div>
+        </article>
+        <article className="infosCardContainer">
+          <div className="infosCardImgContainer proteinsImg">
+            <img src="/images/icons/proteins.svg" alt="" />
+          </div>
+          <div className="infosCardTxtContainer">
+            <div className="infosCartTxtValue">{store.USER_MAIN_DATA.keyData.proteinCount}g</div>
+            <div className="infosCardTxtCategory">Protéines</div>
+          </div>
+        </article>
+        <article className="infosCardContainer">
+          <div className="infosCardImgContainer carbsImg">
+            <img src="/images/icons/carbs.svg" alt="" />
+          </div>
+          <div className="infosCardTxtContainer">
+            <div className="infosCartTxtValue">{store.USER_MAIN_DATA.keyData.carbohydrateCount}g</div>
+            <div className="infosCardTxtCategory">Glucides</div>
+          </div>
+        </article>
+        <article className="infosCardContainer">
+          <div className="infosCardImgContainer fatsImg">
+            <img src="/images/icons/fats.svg" alt="" />
+          </div>
+          <div className="infosCardTxtContainer">
+            <div className="infosCartTxtValue">{store.USER_MAIN_DATA.keyData.lipidCount}g</div>
+            <div className="infosCardTxtCategory">Lipides</div>
+          </div>
+        </article>
+      </React.Fragment>
+    );
+  }
+
   return (
     <main className="home">
       <div className="homeContainer">
-        { isLoading ? showLoading() : showContent()}
-        <div className="asideContent"></div>
+        {store.isLoading ? showLoading() : showContent()}
+        <div className="asideContent">{store.isLoading ?'':showKeyDatas()}</div>
       </div>
     </main>
   );

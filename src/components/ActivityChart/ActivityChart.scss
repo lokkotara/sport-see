@@ -1,4 +1,9 @@
 @import "../../styles/variables";
 .activityChart {
   border-radius: 0.31rem;
+  .legend-item-1 {
+    .recharts-surface {
+      fill: $primary;
+    }
+  }
 }

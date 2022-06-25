@@ -7,7 +7,7 @@ export default function ActivityChart() {
 
   return (
         <div style={{ width: "100%" }}  className="activityChart">
-          <h4> Activités </h4>
+          {/* <h4> Activités </h4> */}
           <ResponsiveContainer width="100%" height={250}>
             <BarChart width={50} height={80} data={store.get.USER_ACTIVITY.sessions} barSize={10}>
               <CartesianGrid strokeDasharray="1" />
@@ -15,7 +15,7 @@ export default function ActivityChart() {
               <YAxis />
               <Bar dataKey="kilogram" fill="black" />
               <Bar dataKey="calories" fill="red" />
-              <Legend />
+              <Legend align="right" verticalAlign="top" iconType="circle" payload={[{value: 'Poids(kg)'},{value: 'Calories brûlées (kCal)'}]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
