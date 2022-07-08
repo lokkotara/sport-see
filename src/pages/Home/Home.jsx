@@ -1,12 +1,12 @@
 import "./Home.scss";
-import { StoreContext } from "../../providers/Store";
-import React, { useEffect } from "react";
-import { Navigate, useParams } from "react-router-dom";
-import { getAllData } from "../../services/actions";
 import ActivityChart from "../../components/ActivityChart/ActivityChart";
-import SessionChart from "../../components/SessionChart/SessionChart";
-import ScoreChart from "../../components/ScoreChart/ScoreChart";
 import PerformanceChart from "../../components/PerformanceChart/PerformanceChart";
+import React, { useEffect } from "react";
+import ScoreChart from "../../components/ScoreChart/ScoreChart";
+import SessionChart from "../../components/SessionChart/SessionChart";
+import { Navigate, useParams } from "react-router-dom";
+import { StoreContext } from "../../providers/Store";
+import { getAllData } from "../../services/actions";
 
 export default function Home() {
   const { id } = useParams();
@@ -18,7 +18,7 @@ export default function Home() {
 
   if (store.error) return <Navigate to="/error" />;
 
-  function showCharts() {
+  const showCharts = () => {
     return (
       <React.Fragment>
         <ActivityChart />
@@ -27,9 +27,9 @@ export default function Home() {
         <PerformanceChart />
       </React.Fragment>
     );
-  }
+  };
 
-  function showHeader() {
+  const showHeader = () => {
     return (
       <div className="containerHeading">
         <p>
@@ -38,26 +38,26 @@ export default function Home() {
         <p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
       </div>
     );
-  }
+  };
 
-  function showLoading() {
+  const showLoading = () => {
     return (
       <div className="spinnerContainer">
         <div className="loadingSpinner"></div>
       </div>
     );
-  }
+  };
 
-  function showContent() {
+  const showContent = () => {
     return (
       <React.Fragment>
         {showHeader()}
         {showCharts()}
       </React.Fragment>
     );
-  }
+  };
 
-  function showKeyDatas() {
+  const showKeyDatas = () => {
     return (
       <React.Fragment>
         <article className="infosCardContainer">
@@ -65,7 +65,9 @@ export default function Home() {
             <img src="/images/icons/calories.svg" alt="" />
           </div>
           <div className="infosCardTxtContainer">
-            <div className="infosCartTxtValue">{store.USER_MAIN_DATA.keyData.calorieCount}kCal</div>
+            <div className="infosCartTxtValue">
+              {store.USER_MAIN_DATA.keyData.calorieCount}kCal
+            </div>
             <div className="infosCardTxtCategory">Calories</div>
           </div>
         </article>
@@ -74,7 +76,9 @@ export default function Home() {
             <img src="/images/icons/proteins.svg" alt="" />
           </div>
           <div className="infosCardTxtContainer">
-            <div className="infosCartTxtValue">{store.USER_MAIN_DATA.keyData.proteinCount}g</div>
+            <div className="infosCartTxtValue">
+              {store.USER_MAIN_DATA.keyData.proteinCount}g
+            </div>
             <div className="infosCardTxtCategory">Protéines</div>
           </div>
         </article>
@@ -83,7 +87,9 @@ export default function Home() {
             <img src="/images/icons/carbs.svg" alt="" />
           </div>
           <div className="infosCardTxtContainer">
-            <div className="infosCartTxtValue">{store.USER_MAIN_DATA.keyData.carbohydrateCount}g</div>
+            <div className="infosCartTxtValue">
+              {store.USER_MAIN_DATA.keyData.carbohydrateCount}g
+            </div>
             <div className="infosCardTxtCategory">Glucides</div>
           </div>
         </article>
@@ -92,19 +98,23 @@ export default function Home() {
             <img src="/images/icons/fats.svg" alt="" />
           </div>
           <div className="infosCardTxtContainer">
-            <div className="infosCartTxtValue">{store.USER_MAIN_DATA.keyData.lipidCount}g</div>
+            <div className="infosCartTxtValue">
+              {store.USER_MAIN_DATA.keyData.lipidCount}g
+            </div>
             <div className="infosCardTxtCategory">Lipides</div>
           </div>
         </article>
       </React.Fragment>
     );
-  }
+  };
 
   return (
     <main className="home">
       <div className="homeContainer">
         {store.isLoading ? showLoading() : showContent()}
-        <div className="asideContent">{store.isLoading ?'':showKeyDatas()}</div>
+        <div className="asideContent">
+          {store.isLoading ? "" : showKeyDatas()}
+        </div>
       </div>
     </main>
   );

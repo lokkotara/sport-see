@@ -1,37 +1,51 @@
 // @ts-nocheck
-import { fetcherGet }          from "./fetcher";
-import { store }               from "../providers/Store";
-import {user_activity, user_average_sessions, user_performance, user_main_data} from "../datas/data";
-import {formatMainDataArray, formatPerformanceArray, formatDaysList}   from "./formatter"
+import { fetcherGet } from "./fetcher";
+import { store } from "../providers/Store";
+import {
+  formatMainDataArray,
+  formatPerformanceArray,
+  formatDaysList,
+} from "./formatter";
+import {
+  user_activity,
+  user_average_sessions,
+  user_performance,
+  user_main_data,
+} from "../datas/data";
+
 let USER_AVERAGE_SESSIONS = [];
-let USER_ACTIVITY         = [];
-let USER_PERFORMANCE      = [];
-let USER_MAIN_DATA        = [];
+let USER_ACTIVITY = [];
+let USER_PERFORMANCE = [];
+let USER_MAIN_DATA = [];
 
 async function getAllData(id) {
   const newData = {};
-  store.set({isLoading: true});
-  try{
-    newData.USER_MAIN_DATA        = await getUserInfos(id);
-    newData.USER_MAIN_DATA.keyData.calorieCount = formatMainDataArray(newData.USER_MAIN_DATA.keyData.calorieCount);
-    newData.USER_PERFORMANCE      = await getUserPerformance(id);
-    newData.USER_ACTIVITY         = await getUserActivity(id);
+  store.set({ isLoading: true });
+  try {
+    newData.USER_MAIN_DATA = await getUserInfos(id);
+    newData.USER_MAIN_DATA.keyData.calorieCount = formatMainDataArray(
+      newData.USER_MAIN_DATA.keyData.calorieCount
+    );
+    newData.USER_PERFORMANCE = await getUserPerformance(id);
+    newData.USER_ACTIVITY = await getUserActivity(id);
     newData.USER_AVERAGE_SESSIONS = await getUserSessions(id);
-    newData.USER_PERFORMANCE.data = formatPerformanceArray(newData.USER_PERFORMANCE);
-    newData.USER_AVERAGE_SESSIONS = formatDaysList(newData.USER_AVERAGE_SESSIONS);
-  }
-  catch(err){
+    newData.USER_PERFORMANCE.data = formatPerformanceArray(
+      newData.USER_PERFORMANCE
+    );
+    newData.USER_AVERAGE_SESSIONS = formatDaysList(
+      newData.USER_AVERAGE_SESSIONS
+    );
+  } catch (err) {
     newData.error = true;
     console.error(err);
-  }
-  finally{
-  newData.isLoading = false;
-  store.set(newData);
+  } finally {
+    newData.isLoading = false;
+    store.set(newData);
   }
 }
 
 async function getUserInfos(id) {
-  if (isMocked) {
+  if (isMocked()) {
     if (USER_MAIN_DATA.length === 0) {
       const mainData = getMockedMainData(parseInt(id));
       if (mainData) USER_MAIN_DATA = mainData;
@@ -39,42 +53,43 @@ async function getUserInfos(id) {
     return {
       userInfos: {
         firstName: USER_MAIN_DATA["userInfos"].firstName,
-        lastName : USER_MAIN_DATA["userInfos"].lastName,
-        age      : USER_MAIN_DATA["userInfos"].age,
+        lastName: USER_MAIN_DATA["userInfos"].lastName,
+        age: USER_MAIN_DATA["userInfos"].age,
       },
       todayScoreDatas: [
         {
-          name : USER_MAIN_DATA["userInfos"].firstName,
-          score: USER_MAIN_DATA.todayScore*100,
-          fill : "red",
+          name: USER_MAIN_DATA["userInfos"].firstName,
+          score: USER_MAIN_DATA.todayScore * 100,
+          fill: "red",
         },
       ],
       keyData: USER_MAIN_DATA.keyData,
-      todayScore: USER_MAIN_DATA.todayScore*100
+      todayScore: USER_MAIN_DATA.todayScore * 100,
     };
   } else {
-  if (USER_MAIN_DATA.length === 0) USER_MAIN_DATA = await fetcherGet(`http://localhost:3000/user/${id}`);
-  return {
+    if (USER_MAIN_DATA.length === 0)
+      USER_MAIN_DATA = await fetcherGet(`http://localhost:3000/user/${id}`);
+    return {
       userInfos: {
         firstName: USER_MAIN_DATA["data"]["userInfos"].firstName,
-        lastName : USER_MAIN_DATA["data"]["userInfos"].lastName,
-        age      : USER_MAIN_DATA["data"]["userInfos"].age,
+        lastName: USER_MAIN_DATA["data"]["userInfos"].lastName,
+        age: USER_MAIN_DATA["data"]["userInfos"].age,
       },
       todayScoreDatas: [
         {
-          name : USER_MAIN_DATA["data"]["userInfos"].firstName,
-          score: USER_MAIN_DATA["data"].todayScore*100,
-          fill : "red",
+          name: USER_MAIN_DATA["data"]["userInfos"].firstName,
+          score: USER_MAIN_DATA["data"].todayScore * 100,
+          fill: "red",
         },
       ],
       keyData: USER_MAIN_DATA["data"].keyData,
-      todayScore: USER_MAIN_DATA["data"].todayScore*100
-    }
+      todayScore: USER_MAIN_DATA["data"].todayScore * 100,
+    };
   }
 }
 
 async function getUserPerformance(id) {
-  if (isMocked) {
+  if (isMocked()) {
     if (USER_PERFORMANCE.length === 0) {
       const performance = getMockedPerformance(parseInt(id));
       if (performance) USER_PERFORMANCE = performance;
@@ -98,7 +113,7 @@ async function getUserPerformance(id) {
 }
 
 async function getUserActivity(id) {
-  if (isMocked) {
+  if (isMocked()) {
     if (USER_ACTIVITY.length === 0) {
       const activity = getMockedActivity(parseInt(id));
       if (activity) USER_ACTIVITY = activity;
@@ -113,20 +128,21 @@ async function getUserActivity(id) {
   }
 }
 
-
 async function getUserSessions(id) {
-  if (isMocked) {
+  if (isMocked()) {
     if (USER_AVERAGE_SESSIONS.length === 0) {
       const sessions = getMockedSessions(parseInt(id));
-      if(sessions) USER_AVERAGE_SESSIONS = sessions;
+      if (sessions) USER_AVERAGE_SESSIONS = sessions;
     }
     return USER_AVERAGE_SESSIONS;
   } else {
-    if (USER_AVERAGE_SESSIONS.length === 0) USER_AVERAGE_SESSIONS = await fetcherGet(`http://localhost:3000/user/${id}/average-sessions`);
-    return  USER_AVERAGE_SESSIONS["data"].sessions;
+    if (USER_AVERAGE_SESSIONS.length === 0)
+      USER_AVERAGE_SESSIONS = await fetcherGet(
+        `http://localhost:3000/user/${id}/average-sessions`
+      );
+    return USER_AVERAGE_SESSIONS["data"].sessions;
   }
 }
-
 
 /**
  * permet de renvoyer un booléen pour savoir si l'url contient "mocked"
@@ -136,26 +152,23 @@ async function getUserSessions(id) {
 const isMocked = () => {
   const mocked = window.location.href.split("?")[1] === "mocked";
   return mocked;
-}
+};
 
 function getMockedSessions(id) {
-  const res = user_average_sessions.find(elt =>elt.userId === id);
-  if(res) return res.sessions;
+  const res = user_average_sessions.find((elt) => elt.userId === id);
+  if (res) return res.sessions;
 }
 function getMockedActivity(id) {
-  const res = user_activity.find(elt =>elt.userId === id);
-  if(res) return res.sessions;
+  const res = user_activity.find((elt) => elt.userId === id);
+  if (res) return res.sessions;
 }
 function getMockedPerformance(id) {
-  const res = user_performance.find(elt =>elt.userId === id);
-  if(res) return res;
+  const res = user_performance.find((elt) => elt.userId === id);
+  if (res) return res;
 }
 function getMockedMainData(id) {
-  const res = user_main_data.find(elt =>elt.id === id);
-  if(res) return res;
+  const res = user_main_data.find((elt) => elt.id === id);
+  if (res) return res;
 }
 
-export {
-  getAllData,
-  isMocked
-};
+export { getAllData, isMocked };

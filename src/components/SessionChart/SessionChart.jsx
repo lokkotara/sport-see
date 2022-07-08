@@ -1,4 +1,5 @@
 import "./SessionChart.scss";
+import PropTypes from "prop-types";
 import React from "react";
 import {
   LineChart,
@@ -7,15 +8,15 @@ import {
   YAxis,
   Tooltip,
   ResponsiveContainer,
-  Rectangle
+  Rectangle,
 } from "recharts";
 import { store } from "../../providers/Store";
 
-function toolTipContent(props) {
+const ToolTipContent = (props) => {
   const { active, payload } = props;
   if (active) {
     return (
-      <div className="tooltipContainer" >
+      <div className="tooltipContainer">
         <span className="tooltip">
           {payload[0].payload.sessionLength} {payload[0].unit}
         </span>
@@ -23,32 +24,32 @@ function toolTipContent(props) {
     );
   }
   return null;
-}
+};
 
-const CustomCursor=(props)=> {
-  const {width, height, points} = props;
-  const formattedWidth = width-(points[0].x-15);
+const CustomCursor = (props) => {
+  let { width, height, points } = props;
+  const formattedWidth = width - (points[0].x - 15);
   return (
     <Rectangle
       x={points[0].x}
       y={0}
       width={formattedWidth}
-      height={height+40}
+      height={height + 40}
       fill="black"
       opacity={0.1}
     />
   );
-}
+};
 
-const CustomDot = (props)=> {
-  const {cx, cy, stroke} = props;
+const CustomDot = (props) => {
+  const { cx, cy, stroke } = props;
   return (
     <g>
       <circle cx={cx} cy={cy} r={4} fill={stroke} />
-      <circle cx={cx} cy={cy} r={8} fill="rgba(250,250,250,0.25)" /> 
+      <circle cx={cx} cy={cy} r={8} fill="rgba(250,250,250,0.25)" />
     </g>
   );
-}
+};
 
 export default function SessionChart() {
   return (
@@ -69,19 +70,13 @@ export default function SessionChart() {
             axisLine={false}
             tickLine={false}
             tickMargin={10}
-            tick={{ fill: "white" , opacity: 0.5}}
+            tick={{ fill: "white", opacity: 0.5 }}
             interval={0}
             padding={{ left: 5, right: 10 }}
             fontSize={12}
           />
-          <YAxis
-            hide={true}
-            domain={["dataMin-20", "dataMax+50"]}
-          />
-          <Tooltip
-            content={toolTipContent}
-            cursor={<CustomCursor/>}
-          />
+          <YAxis hide={true} domain={["dataMin-20", "dataMax+50"]} />
+          <Tooltip content={ToolTipContent} cursor={<CustomCursor />} />
           <Line
             type="natural"
             dataKey="sessionLength"
@@ -96,3 +91,39 @@ export default function SessionChart() {
     </div>
   );
 }
+
+ToolTipContent.propTypes = {
+  props: PropTypes.shape({
+    active: PropTypes.bool.isRequired,
+    payload: PropTypes.arrayOf(
+      PropTypes.shape({
+        payload: PropTypes.shape({
+          sessionLength: PropTypes.number.isRequired,
+        }).isRequired,
+        unit: PropTypes.string.isRequired,
+      }).isRequired
+    ).isRequired,
+  }),
+};
+
+CustomCursor.propTypes = {
+  props: PropTypes.shape({
+    width: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired,
+    points: PropTypes.array.isRequired,
+  }),
+};
+
+CustomDot.propTypes = {
+  props: PropTypes.shape({
+    cx: PropTypes.number.isRequired,
+    cy: PropTypes.number.isRequired,
+    stroke: PropTypes.string.isRequired,
+  }),
+};
+
+// SessionChart.propTypes = {
+//   props: PropTypes.shape({
+//     data: PropTypes.array.isRequired,
+//   })
+// }

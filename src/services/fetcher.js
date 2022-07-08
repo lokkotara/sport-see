@@ -30,9 +30,9 @@ function setServerBaseUrl(url){
   server = url;
 }
 
-function setBearerToken(token){
-  headers.Authorization = `Bearer ${token}`;
-}
+// function setBearerToken(token){
+//   headers.Authorization = `Bearer ${token}`;
+// }
 
 function fetcherPost(url, data){
   return fetcher({url, method: "POST",data });

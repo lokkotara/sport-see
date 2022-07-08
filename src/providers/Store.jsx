@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * contain all global values and method in order to update
  * @typedef  {Object}   storage
@@ -31,9 +33,7 @@ function StoreProvider({ children }) {
   }
 
   return (
-    <StoreContext.Provider 
-// @ts-ignore
-    value={[get, update]}>
+    <StoreContext.Provider value={[get, update]}>
       {children}
     </StoreContext.Provider>
   );
