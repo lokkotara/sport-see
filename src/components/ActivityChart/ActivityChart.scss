@@ -1,0 +1,62 @@
+@import "../../styles/variables";
+.activityChart {
+  padding: 2rem 0 1rem 0;
+  box-sizing: border-box;
+  border-radius: 0.31rem;
+  background-color: $light-alt;
+  display: flex;
+  justify-content:flex-end;
+  align-items: flex-end;
+  position: relative;
+  .activityTitle{
+    font-weight: 500;
+    font-size: 0.95rem;
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+  }
+  .recharts-legend-item {
+    font-size: 0.9rem;
+    margin-right: 1rem;
+    .recharts-surface {
+      margin-right: 0.8rem!important;
+    }
+      &-text {
+      color: #74798C!important;
+    }
+  }
+  .legend-item-1 {
+    .recharts-surface {
+      fill: $primary-alt;
+    }
+  }
+  .legend-item-0 {
+    margin-right: 1.9rem!important;
+    .recharts-surface {
+      fill: $dark;
+    }
+  }
+}
+
+.custom-tooltip-line {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: $primary-alt;
+  color: #fff;
+
+  .desc {
+    padding: 0.7rem 0.5rem;
+    font-size: 0.5rem;
+    // font-weight: 500;
+  }
+}
+.recharts-cartesian-grid-horizontal {
+  line:first-child {
+    display: none;
+  }
+}
+// .recharts-tooltip-wrapper {
+//   left: 50px;
+// }

@@ -1,0 +1,29 @@
+@import "../../styles/variables";
+
+.sessionChart {
+  border-radius: 0.31rem;
+  background-color: $primary;
+  position: relative;
+  .sessionChartTitle {
+    position: absolute;
+    top: 12%;
+    left: 12%;
+    font-weight: 500;
+    color: $light;
+    width: 12rem;
+    line-height: 1.5;
+    opacity: 0.5;
+    font-size: 15px;
+  }
+}
+.tooltipContainer {
+  background-color: white;
+  padding: 0.45rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .tooltip {
+    font-size: 0.5rem;
+    font-weight: 500;
+  }
+}

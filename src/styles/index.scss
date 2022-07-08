@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
 @import "./variables";
 
 body {
@@ -11,6 +12,7 @@ body {
   grid-template-columns: $navBar-size-width auto auto;
   min-height:100vh;
   grid-template-rows: $navBar-size-height auto;
+  height: 100%;
 }
 
 main {
