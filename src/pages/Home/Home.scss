@@ -12,9 +12,10 @@
     margin-right: -1.25rem;
     display: grid;
     column-gap: 1.875rem;
-    row-gap: 3.5rem;
-    grid-template-areas: "containerHeading containerHeading containerHeading containerHeading" "chartsContainer chartsContainer chartsContainer aside" "chartsContainer chartsContainer chartsContainer aside";
-    grid-template-rows: auto 1fr 1fr;
+    row-gap: 1.875rem;
+    grid-template-areas: "containerHeading containerHeading containerHeading containerHeading" "activityChart activityChart activityChart aside" "sessionChart performanceChart scoreChart aside";
+    grid-template-rows: auto 31.25vh 25.68vh;
+    // grid-template-rows: auto 20rem 16.44rem;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     position: relative;
     .containerHeading {
@@ -47,14 +48,6 @@
         animation: spinner 1.5s linear infinite;
       }
     }
-    .chartsContainer {
-      grid-area: chartsContainer;
-      display: grid;
-      grid-template-rows: 1fr 16.5rem;
-      grid-template-columns: 1fr 1fr 1fr;
-      column-gap: 1.875rem;
-      row-gap: 2rem;
-      grid-template-areas: "activityChart activityChart activityChart" "sessionChart performanceChart scoreChart";
       .activityChart {
         grid-area: activityChart;
       }
@@ -67,7 +60,6 @@
       .scoreChart {
         grid-area: scoreChart;
       }
-    }
     .asideContent {
       grid-area: aside;
       display: flex;
@@ -83,24 +75,38 @@
         background-color: $light-alt;
         padding: 0 2rem;
         box-sizing: border-box;
+        .infosCardTxtContainer{
+          margin-right: auto;
+          padding-left: 1.5rem;
+          line-height: 1.5;
+          .infosCartTxtValue {
+            font-size: 1.25rem;
+            font-weight: 700;
+          }
+          .infosCardTxtCategory {
+            font-size: 0.875rem;
+            font-weight: 500;
+          }
+        }
         .infosCardImgContainer {
           width: 3.75rem;
           height: 3.75rem;
           display: flex;
           align-items: center;
           justify-content: center;
+          border-radius: 0.375rem;
         }
         .caloriesImg {
-          background-color: pink;
+          background-color: rgba(255,0,0,0.07);
         }
         .proteinsImg {
-          background-color: blue;
+          background-color: rgba(74, 184, 255, 0.1);
         }
         .carbsImg {
-          background-color: yellow;
+          background-color: rgba(249,206,35,0.1);
         }
         .fatsImg {
-          background-color: orange;
+          background-color: rgba(253, 81, 129, 0.1);
         }
       }
     }

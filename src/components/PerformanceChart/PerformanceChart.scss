@@ -4,3 +4,13 @@
   background-color: $dark;
   border-radius: 0.31rem;
 }
+.customTooltipContainer {
+  background-color: $light;
+  .tooltipText {
+    font-size: 0.75rem;
+    color: $dark;
+    font-weight: 500;
+    padding: 0.25rem 0.5rem;
+    margin: 0;
+  }
+}
