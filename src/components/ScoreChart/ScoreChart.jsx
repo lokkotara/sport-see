@@ -1,30 +1,31 @@
 import "./ScoreChart.scss";
-import React, { useContext } from "react";
+import React from "react";
 import {
   RadialBarChart,
   RadialBar,
   ResponsiveContainer,
   PolarAngleAxis,
-  Tooltip,
 } from "recharts";
 import { store } from "../../providers/Store";
 
 export default function ScoreChart() {
-const score = store.get.USER_MAIN_DATA.todayScore;
   return (
     <div style={{ width: "100%" }} className="scoreChart">
-        {/* <div>{score}</div> */}
+      <div className="scoreChartTitle">Score</div>
+      <div className="whiteCircle">
+        <span className="scoreChartScore">
+          <span className="scoreChartScoreValue">{store.get.USER_MAIN_DATA.todayScore}%</span> de votre objectif
+        </span>
+      </div>
       <ResponsiveContainer width="100%" height="100%">
         <RadialBarChart
           width={730}
           height={250}
           innerRadius={80}
           outerRadius={100}
-          data={store.get.USER_MAIN_DATA.todayScore}
+          data={store.get.USER_MAIN_DATA.todayScoreDatas}
           startAngle={90}
           barSize={10}
-          // @ts-ignore
-          background={{ fill: "white" }}
           endAngle={450}
         >
           <PolarAngleAxis
@@ -35,12 +36,12 @@ const score = store.get.USER_MAIN_DATA.todayScore;
           />
           <RadialBar
             dataKey="score"
-            background
+            background= {false}
+            cornerRadius={10}
             // @ts-ignore
             minAngle={100}
             clockWise={true}
           />
-          <Tooltip />
         </RadialBarChart>
       </ResponsiveContainer>
     </div>

@@ -6,44 +6,47 @@ import {
   PolarGrid,
   PolarAngleAxis,
   ResponsiveContainer,
+  PolarRadiusAxis
 } from "recharts";
 import { store } from "../../providers/Store";
 
+function customTick({ payload, x, y, textAnchor, stroke }) {
+  return (
+    <g className="recharts-layer recharts-polar-angle-axis-tick" >
+      <text
+        stroke={stroke}
+        y={y+3}
+        fontSize="0.75rem"
+        fontWeight= "500"
+        className="recharts-text recharts-polar-angle-axis-tick-value"
+        textAnchor={textAnchor}
+      >
+        <tspan x={x} style={{ fill: "white"  }} >
+          {payload.value}
+        </tspan>
+      </text>
+    </g>
+  );
+}
 export default function PerformanceChart() {
-  // const kind = store.get.USER_PERFORMANCE.kind;
-
-  function customTick({ payload, x, y, textAnchor, stroke, radius }) {
-    return (
-      <g className="recharts-layer recharts-polar-angle-axis-tick">
-        <text
-          radius={radius}
-          stroke={stroke}
-          x={x}
-          y={y}
-          fill="white"
-          className="recharts-text recharts-polar-angle-axis-tick-value"
-          textAnchor={textAnchor}
-        >
-          <tspan x={x} dy="0.25em">
-            {payload.value}
-          </tspan>
-        </text>
-      </g>
-    );
-  }
-
   return (
     <div className="performanceChart">
       <ResponsiveContainer width="100%" height="100%">
-        <RadarChart
-          cx="50%"
-          cy="50%"
-          outerRadius="80%"
-          data={store.get.USER_PERFORMANCE.data}
-        >
+        <RadarChart outerRadius={85} data={store.get.USER_PERFORMANCE.data}>
           <PolarGrid radialLines={false} />
-          <PolarAngleAxis dataKey="kind" tick={customTick} />
-          <Radar name="Mike" dataKey="value" fill="red" fillOpacity={0.6} />
+          <PolarAngleAxis
+            dataKey="kind"
+            tick={customTick}
+            tickSize={12}
+            orient="top"
+          />
+          <PolarRadiusAxis 
+					angle={30} 
+					domain={[0, 'dataMax+20']}
+					tick={false}
+					axisLine={false} 
+					/>
+          <Radar dataKey="value" fill="#ff0101" fillOpacity={0.6} />
         </RadarChart>
       </ResponsiveContainer>
     </div>
