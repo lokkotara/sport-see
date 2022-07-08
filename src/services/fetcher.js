@@ -1,4 +1,3 @@
-import data from '../datas/default.js';
 const headers = {
   "Accept": "application/json",
   "Content-Type": "application/json"

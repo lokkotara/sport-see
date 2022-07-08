@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { isMockedFunction } from "../../services/actions";
+import { isMocked as isMockedFunction } from "../../services/actions";
 import { store } from "../../providers/Store";
 import "./NavBar.scss";
 
 export default function NavBar({side}) {
 
-  const [isMocked] = useState(isMockedFunction());
+  const [isMocked] = useState(isMockedFunction);
   let {id} = useParams();
   if (id === undefined) id = store.get.userId;
 

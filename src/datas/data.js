@@ -1,4 +1,4 @@
-const uSER_MAIN_DATA = [
+const user_main_data = [
     {
         id: 12,
         userInfos: {
@@ -21,7 +21,7 @@ const uSER_MAIN_DATA = [
             lastName: 'Ratorez',
             age: 34,
         },
-        score: 0.3,
+        todayScore: 0.3,
         keyData: {
             calorieCount: 2500,
             proteinCount: 90,
@@ -31,7 +31,7 @@ const uSER_MAIN_DATA = [
     }
 ]
 
-const uSER_ACTIVITY = [
+const user_activity = [
     {
         userId: 12,
         sessions: [
@@ -115,7 +115,7 @@ const uSER_ACTIVITY = [
 ]
 
 
-const uSER_AVERAGE_SESSIONS = [
+const user_average_sessions = [
     {
         userId: 12,
         sessions: [
@@ -185,7 +185,7 @@ const uSER_AVERAGE_SESSIONS = [
 ]
 
 
-const uSER_PERFORMANCE = [
+const user_performance = [
     {
         userId: 12,
         kind: {
@@ -265,8 +265,8 @@ const uSER_PERFORMANCE = [
 
 
 module.exports = {
-    uSER_MAIN_DATA,
-    uSER_ACTIVITY,
-    uSER_AVERAGE_SESSIONS,
-    uSER_PERFORMANCE
+    user_main_data,
+    user_activity,
+    user_average_sessions,
+    user_performance
 }

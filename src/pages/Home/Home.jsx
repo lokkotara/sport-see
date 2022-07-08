@@ -1,6 +1,6 @@
 import "./Home.scss";
 import { StoreContext } from "../../providers/Store";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import { getAllData } from "../../services/actions";
 import ActivityChart from "../../components/ActivityChart/ActivityChart";
@@ -13,21 +13,19 @@ export default function Home() {
   const store = React.useContext(StoreContext)[0];
 
   useEffect(() => {
-    if (!store.isLoading && !store.USER_MAIN_DATA.todayScore) {
-      getAllData(id);
-    }
+    if (!store.isLoading && !store.USER_MAIN_DATA.todayScore) getAllData(id);
   }, [id, store]);
 
   if (store.error) return <Navigate to="/error" />;
 
   function showCharts() {
     return (
-      <div className="chartsContainer">
+      <React.Fragment>
         <ActivityChart />
         <SessionChart />
         <ScoreChart />
         <PerformanceChart />
-      </div>
+      </React.Fragment>
     );
   }
 

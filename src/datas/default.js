@@ -14,6 +14,11 @@ const data = {
       carbohydrateCount: 0,
       lipidCount: 0,
     },
+    todayScoreDatas: {
+      name: 'Cecilia',
+      score: 0.12,
+      fill: 'red',
+  },
   },
   USER_ACTIVITY: {
     sessions: [
