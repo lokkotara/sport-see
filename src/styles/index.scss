@@ -8,11 +8,11 @@ body {
 
 #root {
   display: grid;
-  grid-template-areas: "header-top header-top header-top" "header-left page page";
-  grid-template-columns: $navBar-size-width auto auto;
+  grid-template-areas: "header-top header-top" "header-left page";
+  grid-template-columns: $navBar-size-width auto;
   min-height:100vh;
+  max-width:100vw;
   grid-template-rows: $navBar-size-height auto;
-  height: 100%;
 }
 
 main {
@@ -22,4 +22,10 @@ main {
 a {
   text-decoration: none;
   color: inherit;
+}
+
+.chart {
+  display:flex;
+  justify-content: center;
+  align-items: center;
 }

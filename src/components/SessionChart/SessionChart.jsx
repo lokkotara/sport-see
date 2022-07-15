@@ -13,7 +13,7 @@ import {
 import { store } from "../../providers/Store";
 
 const ToolTipContent = (props) => {
-  const { active, payload } = props;
+  const { payload, active } = props;
   if (active) {
     return (
       <div className="tooltipContainer">
@@ -27,7 +27,7 @@ const ToolTipContent = (props) => {
 };
 
 const CustomCursor = (props) => {
-  let { width, height, points } = props;
+  const { width, height, points } = props;
   const formattedWidth = width - (points[0].x - 15);
   return (
     <Rectangle
@@ -53,9 +53,9 @@ const CustomDot = (props) => {
 
 export default function SessionChart() {
   return (
-    <div style={{ width: "100%", height: "100%" }} className="sessionChart">
+    <div className="sessionChart chart">
       <div className="sessionChartTitle">Durée moyenne des sessions</div>
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width={'99%'}>
         <LineChart
           data={store.get.USER_AVERAGE_SESSIONS}
           margin={{
@@ -76,7 +76,7 @@ export default function SessionChart() {
             fontSize={12}
           />
           <YAxis hide={true} domain={["dataMin-20", "dataMax+50"]} />
-          <Tooltip content={ToolTipContent} cursor={<CustomCursor />} />
+          <Tooltip content={<ToolTipContent />} cursor={<CustomCursor />} />
           <Line
             type="natural"
             dataKey="sessionLength"
@@ -92,26 +92,16 @@ export default function SessionChart() {
   );
 }
 
+// /**
+//  * @typedef ToolTipContentProps
+//  * @type {Object} @property {Object} payload @property {Boolean} active
+// */
 ToolTipContent.propTypes = {
-  props: PropTypes.shape({
-    active: PropTypes.bool.isRequired,
-    payload: PropTypes.arrayOf(
-      PropTypes.shape({
-        payload: PropTypes.shape({
-          sessionLength: PropTypes.number.isRequired,
-        }).isRequired,
-        unit: PropTypes.string.isRequired,
-      }).isRequired
-    ).isRequired,
-  }),
+  props: PropTypes.func
 };
 
 CustomCursor.propTypes = {
-  props: PropTypes.shape({
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
-    points: PropTypes.array.isRequired,
-  }),
+  props: PropTypes.func,
 };
 
 CustomDot.propTypes = {
@@ -121,9 +111,3 @@ CustomDot.propTypes = {
     stroke: PropTypes.string.isRequired,
   }),
 };
-
-// SessionChart.propTypes = {
-//   props: PropTypes.shape({
-//     data: PropTypes.array.isRequired,
-//   })
-// }

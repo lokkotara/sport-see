@@ -1,3 +1,4 @@
+// @ts-nocheck
 // import PropTypes from "prop-types";
 import "./ScoreChart.scss";
 import React from "react";
@@ -11,7 +12,7 @@ import { store } from "../../providers/Store";
 
 export default function ScoreChart() {
   return (
-    <div style={{ width: "100%" }} className="scoreChart">
+    <div className="scoreChart chart">
       <div className="scoreChartTitle">Score</div>
       <div className="whiteCircle">
         <span className="scoreChartScore">
@@ -20,10 +21,8 @@ export default function ScoreChart() {
           </span> de votre objectif
         </span>
       </div>
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width={'99%'}>
         <RadialBarChart
-          width={730}
-          height={250}
           innerRadius={80}
           outerRadius={100}
           data={store.get.USER_MAIN_DATA.todayScoreDatas}
@@ -41,7 +40,6 @@ export default function ScoreChart() {
             dataKey="score"
             background={false}
             cornerRadius={10}
-            // @ts-ignore
             minAngle={100}
             clockWise={true}
           />
@@ -50,11 +48,3 @@ export default function ScoreChart() {
     </div>
   );
 }
-
-// ScoreChart.propTypes = {
-//   data: PropTypes.arrayOf(PropTypes.shape({
-//     name: PropTypes.string,
-//     score: PropTypes.number,
-//     fill: PropTypes.string
-//   })),
-// };

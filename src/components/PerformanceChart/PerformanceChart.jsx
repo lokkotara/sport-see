@@ -11,7 +11,7 @@ import {
 } from "recharts";
 import { store } from "../../providers/Store";
 
-const customTick = ({ payload, x, y, textAnchor, stroke }) => {
+const CustomTick = ({ payload, x, y, textAnchor, stroke }) => {
   return (
     <g className="recharts-layer recharts-polar-angle-axis-tick">
       <text
@@ -32,13 +32,13 @@ const customTick = ({ payload, x, y, textAnchor, stroke }) => {
 
 export default function PerformanceChart() {
   return (
-    <div className="performanceChart">
-      <ResponsiveContainer width="100%" height="100%">
+    <div className="performanceChart chart">
+      <ResponsiveContainer width={'99%'}>
         <RadarChart outerRadius={85} data={store.get.USER_PERFORMANCE.data}>
           <PolarGrid radialLines={false} />
           <PolarAngleAxis
             dataKey="kind"
-            tick={customTick}
+            tick={<CustomTick/>}
             tickSize={12}
             orient="top"
           />
@@ -55,7 +55,14 @@ export default function PerformanceChart() {
   );
 }
 
-customTick.propTypes = {
+/**
+ * @typedef customTickProps
+ * @type {Object}
+ * @property {Object} payload
+ * @property {string} textAnchor
+ * @property {string} stroke
+ */
+CustomTick.propTypes = {
   payload: PropTypes.shape({
     coordinate: PropTypes.number,
     value: PropTypes.string,
@@ -67,12 +74,3 @@ customTick.propTypes = {
   textAnchor: PropTypes.string,
   stroke: PropTypes.string,
 };
-
-// PerformanceChart.propTypes = {
-//   data: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       kind: PropTypes.string,
-//       value: PropTypes.number
-//     })
-//   )
-// }

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import "./ActivityChart.scss";
 import PropTypes from "prop-types";
 import React from "react";
@@ -14,19 +15,23 @@ import {
   Rectangle,
 } from "recharts";
 
+/** @param {customToolTipProps} props*/
 const CustomToolTip = ({ active, payload }) => {
-  if (active && payload && payload.length) {
-    return (
-      <div className="custom-tooltip-line">
-        <span className="desc">{payload[0].value + "kg"}</span>
-        <span className="desc">{payload[1].value + "Kcal"}</span>
-      </div>
-    );
-  }
-  return null;
-};
+  // console.log(active, payload);
+    if (active && payload && payload.length) {
+      return (
+        <div className="custom-tooltip-line">
+          <span className="tooltipPayload">{payload[0].value + "kg"}</span>
+          <span className="tooltipPayload">{payload[1].value + "Kcal"}</span>
+        </div>
+      );
+    }
+    return null;
+  };
 
+/** @param {customCursorProps} props*/
 const CustomCursor = (props) => {
+  console.log(props);
   const { x, y, width, height } = props;
   return (
     <Rectangle
@@ -45,15 +50,13 @@ export default function ActivityChart() {
   const formatXAxis = (i) => i + 1;
 
   return (
-    <div style={{ width: "100%", height: "100%" }} className="activityChart">
+    <div className="activityChart chart">
       <span className="activityTitle">Activité quotidienne</span>
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width={'99%'} >
         <BarChart
           data={store.get.USER_ACTIVITY.sessions}
           margin={{ top: 65, right: 30, bottom: 10, left: -20 }}
           barGap={8}
-          width={50}
-          height={50}
         >
           <CartesianGrid strokeDasharray="1 2" stroke="#ccc" vertical={false} />
           <XAxis
@@ -115,7 +118,7 @@ export default function ActivityChart() {
             cursor={<CustomCursor />}
             wrapperStyle={{ top: -40 }}
             labelStyle={{ backgroundColor: "green" }}
-            content={<CustomToolTip active={undefined} payload={undefined} />}
+            content={<CustomToolTip payload={[]} active={false}/>}
             offset={35}
           />
         </BarChart>
@@ -124,25 +127,25 @@ export default function ActivityChart() {
   );
 }
 
+/**
+ * @typedef customToolTipProps
+ * @type {Object}
+ * @property {boolean} active
+ * @property {array} payload
+ */
 CustomToolTip.propTypes = {
-  active: PropTypes.bool,
-  payload: PropTypes.array,
+    active: PropTypes.bool,
+    payload: PropTypes.array,
 };
 
+/**
+ * @typedef customCursorProps
+ * @type {Object} props
+ * @property {number} props.x
+ * @property {number} props.y
+ * @property {number} props.width
+ * @property {number} props.height
+ */
 CustomCursor.propTypes = {
-  props: PropTypes.shape({
-    x: PropTypes.number,
-    y: PropTypes.number,
-    width: PropTypes.number,
-    height: PropTypes.number,
-  }),
+    props: PropTypes.objectOf(PropTypes.number)
 };
-
-// ActivityChart.propTypes = {
-//   sessions: PropTypes.shape({
-//       day: PropTypes.string.isRequired,
-//       kilogram: PropTypes.number.isRequired,
-//       calories: PropTypes.number.isRequired,
-//     }),
-//   formatXAxis: PropTypes.func,
-// };
