@@ -1,0 +1,37 @@
+@import "../../styles/variables";
+.scoreChart {
+  border-radius: 0.31rem;
+  background-color: $light-alt;
+  position: relative;
+  .scoreChartTitle {
+    position: absolute;
+    top: 12%;
+    left: 12%;
+    font-weight: 500;
+  }
+}
+.whiteCircle {
+  background-color: white;
+  border-radius: 50%;
+  width: 9.4rem;
+  height: 9.4rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  .scoreChartScore {
+    width: 5.325rem;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5;
+    .scoreChartScoreValue {
+      font-size: 1.6rem;
+      font-weight: 700;
+      display: block;
+    }
+  }
+}

@@ -1,0 +1,67 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+.navBar {
+  background-color: $darker;
+  color: $light;
+}
+.navBarLinks {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.navBar-top {
+  grid-area: header-top;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 1.75rem;
+  padding-right: 5.5rem;
+  nav {
+    flex: 1;
+    padding-left: 9rem;
+  }
+  ul {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.5rem;
+  }
+}
+.navBar-left {
+  grid-area: header-left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 3.69rem;
+  nav {
+    padding-top: 6rem;
+    flex: 1;
+    @extend %verticalText;
+  }
+  ul {
+    display: flex;
+    justify-content: center;
+    column-gap: 1.25rem;
+    li {
+      width: 3rem;
+      height: 3rem;
+      background-color: $light;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0.375rem;
+      padding: 0.5rem;
+      img {
+        width: 2.4rem;
+        height: 2.4rem;
+      }
+    }
+  }
+  .copyright-text {
+    @extend %verticalText;
+    margin-top: auto;
+    font-size: 0.75rem;
+    transform: rotate(180deg);
+  }
+}
