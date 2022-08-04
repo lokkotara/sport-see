@@ -1,3 +1,7 @@
+/**
+ * @typedef {import ("../interfaces/interface").specsToFetch} specsToFetch
+ */
+
 const headers = {
   "Accept": "application/json",
   "Content-Type": "application/json"
@@ -6,16 +10,12 @@ const headers = {
 let server ="";
 
 /**
- * [async description]
- * @param   {Object} specs
- * @param   {String}  specs.url       [url description]
- * @param   {("GET" | "POST" | "DELETE" | "PATCH" | "PUT")}  specs.method    [method description]
- * @param   {Object}  [specs.options]      [data description]
- * @param   {Object}  [specs.data]      [data description]
- *
- * @return  {Promise.<Object>}            [return description]
+ * Custom method to fetch data from the server
+ * @async
+ * @param {specsToFetch} specs
+ * @returns  {Promise.<Object>} 
  */
-async function fetcher({url, method, data, options}) {
+const fetcher = async ({url, method}) => {
   try {
     const res = await fetch(server+url, { headers, method});
     return await res.json();
@@ -24,26 +24,27 @@ async function fetcher({url, method, data, options}) {
     console.error("error:",err);
     throw err;
   }
-}
+};
 
-function setServerBaseUrl(url){
+/**
+ * Define the server url
+ * @param {string} url
+ */
+const setServerBaseUrl = url => {
   server = url;
-}
+};
 
-// function setBearerToken(token){
-//   headers.Authorization = `Bearer ${token}`;
-// }
-
-function fetcherPost(url, data){
-  return fetcher({url, method: "POST",data });
-}
-
-async function fetcherGet(url){
+/**
+ * Custom fetch method with the GET method
+ * @async
+ * @param {string} url
+ * @returns  {Promise.<Object>} 
+ */
+const fetcherGet = async url => {
   return await fetcher({url, method: "GET" });
-}
+};
 
 export {
-  fetcherPost,
   fetcherGet,
   setServerBaseUrl
 };

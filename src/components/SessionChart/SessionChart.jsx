@@ -12,9 +12,15 @@ import {
 } from "recharts";
 import { store } from "../../providers/Store";
 
-const ToolTipContent = (props) => {
-  const { active, payload } = props;
-  if (active) {
+/**
+ * @typedef {import ("../../interfaces/interface").ToolTipContentProps} ToolTipContentProps
+ * @typedef {import ("../../interfaces/interface").CustomCursorProps} CustomCursorProps
+ * @typedef {import ("../../interfaces/interface").CustomDotProps} CustomDotProps
+ */
+
+/** @param {ToolTipContentProps} props*/
+const ToolTipContent = ({ payload, active }) => {
+  if (payload && active) {
     return (
       <div className="tooltipContainer">
         <span className="tooltip">
@@ -26,23 +32,29 @@ const ToolTipContent = (props) => {
   return null;
 };
 
-const CustomCursor = (props) => {
-  let { width, height, points } = props;
-  const formattedWidth = width - (points[0].x - 15);
-  return (
-    <Rectangle
-      x={points[0].x}
+/** @param {CustomCursorProps} props*/
+const CustomCursor = ({ width, height, points }) => {
+  let formattedWidth;
+  let x;
+  if (width && points && height) {
+    formattedWidth = width - (points[0].x - 15);
+    x= points[0].x;
+    height = height + 40;
+  }
+    return (
+      <Rectangle
+      x={x}
       y={0}
       width={formattedWidth}
-      height={height + 40}
+      height={height}
       fill="black"
       opacity={0.1}
-    />
-  );
+      />
+      );
 };
 
-const CustomDot = (props) => {
-  const { cx, cy, stroke } = props;
+/** @param {CustomDotProps} props*/
+const CustomDot = ({ cx, cy, stroke }) => {
   return (
     <g>
       <circle cx={cx} cy={cy} r={4} fill={stroke} />
@@ -53,9 +65,9 @@ const CustomDot = (props) => {
 
 export default function SessionChart() {
   return (
-    <div style={{ width: "100%", height: "100%" }} className="sessionChart">
+    <div className="sessionChart chart">
       <div className="sessionChartTitle">Durée moyenne des sessions</div>
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width={'99%'}>
         <LineChart
           data={store.get.USER_AVERAGE_SESSIONS}
           margin={{
@@ -76,7 +88,7 @@ export default function SessionChart() {
             fontSize={12}
           />
           <YAxis hide={true} domain={["dataMin-20", "dataMax+50"]} />
-          <Tooltip content={ToolTipContent} cursor={<CustomCursor />} />
+          <Tooltip content={<ToolTipContent />} cursor={<CustomCursor />} />
           <Line
             type="natural"
             dataKey="sessionLength"
@@ -93,37 +105,18 @@ export default function SessionChart() {
 }
 
 ToolTipContent.propTypes = {
-  props: PropTypes.shape({
-    active: PropTypes.bool.isRequired,
-    payload: PropTypes.arrayOf(
-      PropTypes.shape({
-        payload: PropTypes.shape({
-          sessionLength: PropTypes.number.isRequired,
-        }).isRequired,
-        unit: PropTypes.string.isRequired,
-      }).isRequired
-    ).isRequired,
-  }),
+  payload: PropTypes.array,
+  active: PropTypes.bool,
 };
 
 CustomCursor.propTypes = {
-  props: PropTypes.shape({
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
-    points: PropTypes.array.isRequired,
-  }),
+  width: PropTypes.number,
+  height: PropTypes.number,
+  points: PropTypes.array,
 };
 
 CustomDot.propTypes = {
-  props: PropTypes.shape({
-    cx: PropTypes.number.isRequired,
-    cy: PropTypes.number.isRequired,
-    stroke: PropTypes.string.isRequired,
-  }),
+    cx: PropTypes.number,
+    cy: PropTypes.number,
+    stroke: PropTypes.string,
 };
-
-// SessionChart.propTypes = {
-//   props: PropTypes.shape({
-//     data: PropTypes.array.isRequired,
-//   })
-// }

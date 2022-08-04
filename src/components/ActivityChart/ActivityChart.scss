@@ -8,6 +8,7 @@
   justify-content:flex-end;
   align-items: flex-end;
   position: relative;
+  // max-width: 54rem;
   .activityTitle{
     font-weight: 500;
     font-size: 0.95rem;
@@ -46,10 +47,9 @@
   background-color: $primary-alt;
   color: #fff;
 
-  .desc {
+  .tooltipPayload {
     padding: 0.7rem 0.5rem;
     font-size: 0.5rem;
-    // font-weight: 500;
   }
 }
 .recharts-cartesian-grid-horizontal {
@@ -57,6 +57,6 @@
     display: none;
   }
 }
-// .recharts-tooltip-wrapper {
-//   left: 50px;
+// .recharts-cartesian-axis-line {
+//   padding: 0 -5rem;
 // }

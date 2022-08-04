@@ -6,14 +6,17 @@ import ScoreChart from "../../components/ScoreChart/ScoreChart";
 import SessionChart from "../../components/SessionChart/SessionChart";
 import { Navigate, useParams } from "react-router-dom";
 import { StoreContext } from "../../providers/Store";
-import { getAllData } from "../../services/actions";
+import getAllData from "../../services/actions";
+import getAllMockedData from "../../services/mocked";
+import {isMocked} from "../../services/mocked";
 
 export default function Home() {
   const { id } = useParams();
   const store = React.useContext(StoreContext)[0];
 
   useEffect(() => {
-    if (!store.isLoading && !store.USER_MAIN_DATA.todayScore) getAllData(id);
+    if (!store.isLoading && !store.USER_MAIN_DATA.todayScore && id && isMocked()) getAllMockedData(id);
+    if (!store.isLoading && !store.USER_MAIN_DATA.todayScore && id && !isMocked()) getAllData(id);
   }, [id, store]);
 
   if (store.error) return <Navigate to="/error" />;
@@ -66,7 +69,7 @@ export default function Home() {
           </div>
           <div className="infosCardTxtContainer">
             <div className="infosCartTxtValue">
-              {store.USER_MAIN_DATA.keyData.calorieCount}kCal
+              {store.USER_MAIN_DATA.keyData.calorieCount.toLocaleString("en-US")}kCal
             </div>
             <div className="infosCardTxtCategory">Calories</div>
           </div>
