@@ -1,70 +1,41 @@
-# Getting Started with Create React App
+<p align="center"><img src="./public/images/logo.svg"></p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# SportSee
 
-## Available Scripts
+## Comment installer le projet
 
-In the project directory, you can run:
+Pour installer le back, rendez-vous sur [ce repo](https://github.com/OpenClassrooms-Student-Center/P9-front-end-dashboard) et suivez les instructions pour procéder à l'installation.
 
-### `npm start`
+Pour installer le front, clonez ce repo sur votre ordinateur.  
+Vous pouvez ensuite installer les dépendances en vous positionnant à la racine du projet et en tapant la commande `npm install` dans la console.  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Comment lancer le projet
 
-### `npm test`
+Une fois le projet installé, lancez d'abord le back en vous positionnant à la racine et en tapant `npm start`.  
+Un message indiquant `Magic happens on port 3000` doit s'afficher dans la console pour confirmer la réussite du lancement.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Ensuite, positionnez vous à la racine du dossier du front et taper `npm start` dans la console.  
+Un message dans la console vous indique que le port 3000 est déjà utilisé et vous demande si vous souhaitez en utiliser un autre.  
+Tapez alors la touche `y` pour accepter. 
 
-### `npm run build`
+Une fenêtre de navigation s'ouvre et vous avez à présent accès à l'application web.  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Concernant cette première version du projet
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Cette application étant encore en phase de développement, nous avons la possibilité de récupérer les infos de l'utilisateur par 2 méthodes :
+- Un appel à l'API
+- les données mockées
 
-### `npm run eject`
+Pour le moment, seuls deux utilisateurs sont présents pour ces 2 méthodes. Leurs ids sont `12` et `18`.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Aucun système d'authentification n'est encore en place sur ce projet.  
+Lors du lancement du projet, vous pouvez constater que le système de routage redirige l'utilisateur sur la page d'erreur.  
+C'est tout à fait normal puisqu'aucun utilisateur n'a encore été précisé. 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Pour rectifier cela, il suffit de modifier l'URL en ajoutant `/user/` ainsi que l'id de l'utilisateur désiré puis lancer la recherche.  
+Par exemple, pour afficher les informations de Cecilia lorsque le front est lancé sur le port 3001, vous pouvez taper `http://localhost:3001/user/18`.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Si l'on souhaite plutôt consulter les données mockées, il suffit de rajouter `?mocked` après l'id de l'utilisateur.  
+Pour reprendre l'exemple juste au-dessus, cela donnerait `http://localhost:3001/user/18?mocked`.

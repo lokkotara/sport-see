@@ -42,12 +42,12 @@ export default function getAllMockedData(id) {
     newData.USER_PERFORMANCE = getMockedUserPerformance(id);
     newData.USER_ACTIVITY = getMockedUserActivity(id);
     newData.USER_AVERAGE_SESSIONS = getMockedUserSessions(id);
+    newData.USER_PERFORMANCE.data = formatPerformanceArray(newData.USER_PERFORMANCE);
+    newData.USER_AVERAGE_SESSIONS = formatDaysList(newData.USER_AVERAGE_SESSIONS);
   } catch (err) {
     newData.error = true;
     console.error(err);
   } finally {
-    newData.USER_PERFORMANCE.data = formatPerformanceArray(newData.USER_PERFORMANCE);
-    newData.USER_AVERAGE_SESSIONS = formatDaysList(newData.USER_AVERAGE_SESSIONS);
     newData.isLoading = false;
     store.set(newData);
   }

@@ -28,12 +28,12 @@ export default async function getAllData(id) {
     newData.USER_PERFORMANCE = await getUserPerformance(id);
     newData.USER_ACTIVITY = await getUserActivity(id);
     newData.USER_AVERAGE_SESSIONS = await getUserSessions(id);
+    newData.USER_PERFORMANCE.data = formatPerformanceArray(newData.USER_PERFORMANCE);
+    newData.USER_AVERAGE_SESSIONS = formatDaysList(newData.USER_AVERAGE_SESSIONS);
   } catch (err) {
     newData.error = true;
     console.error(err);
   } finally {
-    newData.USER_PERFORMANCE.data = formatPerformanceArray(newData.USER_PERFORMANCE);
-    newData.USER_AVERAGE_SESSIONS = formatDaysList(newData.USER_AVERAGE_SESSIONS);
     newData.isLoading = false;
     store.set(newData);
   }
