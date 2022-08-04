@@ -1,5 +1,3 @@
-// @ts-nocheck
-// import PropTypes from "prop-types";
 import "./ScoreChart.scss";
 import React from "react";
 import {
@@ -40,8 +38,6 @@ export default function ScoreChart() {
             dataKey="score"
             background={false}
             cornerRadius={10}
-            minAngle={100}
-            clockWise={true}
           />
         </RadialBarChart>
       </ResponsiveContainer>

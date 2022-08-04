@@ -1,4 +1,3 @@
-// @ts-nocheck
 import "./ActivityChart.scss";
 import PropTypes from "prop-types";
 import React from "react";
@@ -15,10 +14,14 @@ import {
   Rectangle,
 } from "recharts";
 
+/**
+ * @typedef {import ("../../interfaces/interface").customToolTipProps} customToolTipProps
+ * @typedef {import ("../../interfaces/interface").customCursorProps} customCursorProps
+ */
+
 /** @param {customToolTipProps} props*/
 const CustomToolTip = ({ active, payload }) => {
-  // console.log(active, payload);
-    if (active && payload && payload.length) {
+    if (active && payload ) {
       return (
         <div className="custom-tooltip-line">
           <span className="tooltipPayload">{payload[0].value + "kg"}</span>
@@ -30,19 +33,18 @@ const CustomToolTip = ({ active, payload }) => {
   };
 
 /** @param {customCursorProps} props*/
-const CustomCursor = (props) => {
-  console.log(props);
-  const { x, y, width, height } = props;
-  return (
-    <Rectangle
-      fill="rgba(0,0,0,0.15)"
-      strokeWidth={15}
-      x={x}
-      y={y}
-      width={width / 2}
-      height={height}
-      transform="translate(28)"
-    />
+const CustomCursor = ({ x, y, width, height }) => {
+  if(width) width = width/2
+    return (
+      <Rectangle
+        fill="rgba(0,0,0,0.15)"
+        strokeWidth={15}
+        x={x}
+        y={y}
+        width={width}
+        height={height}
+        transform='translate(25, 0)'
+      />
   );
 };
 
@@ -115,10 +117,10 @@ export default function ActivityChart() {
           />
           <Tooltip
             label={store.get.USER_ACTIVITY.sessions}
-            cursor={<CustomCursor />}
+            cursor={<CustomCursor width={120}/>}
             wrapperStyle={{ top: -40 }}
             labelStyle={{ backgroundColor: "green" }}
-            content={<CustomToolTip payload={[]} active={false}/>}
+            content={<CustomToolTip active={false}/>}
             offset={35}
           />
         </BarChart>
@@ -127,25 +129,14 @@ export default function ActivityChart() {
   );
 }
 
-/**
- * @typedef customToolTipProps
- * @type {Object}
- * @property {boolean} active
- * @property {array} payload
- */
 CustomToolTip.propTypes = {
-    active: PropTypes.bool,
+    active: PropTypes.bool.isRequired,
     payload: PropTypes.array,
 };
 
-/**
- * @typedef customCursorProps
- * @type {Object} props
- * @property {number} props.x
- * @property {number} props.y
- * @property {number} props.width
- * @property {number} props.height
- */
 CustomCursor.propTypes = {
-    props: PropTypes.objectOf(PropTypes.number)
+    x: PropTypes.number,
+    y: PropTypes.number,
+    width: PropTypes.number.isRequired,
+    height: PropTypes.number,
 };

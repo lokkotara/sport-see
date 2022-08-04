@@ -11,19 +11,25 @@ import {
 } from "recharts";
 import { store } from "../../providers/Store";
 
+/**
+ * @typedef {import ("../../interfaces/interface").customTickProps} customTickProps
+ */
+
+/** @param {customTickProps} props*/
 const CustomTick = ({ payload, x, y, textAnchor, stroke }) => {
+  if (y) y=y+3
   return (
     <g className="recharts-layer recharts-polar-angle-axis-tick">
       <text
         stroke={stroke}
-        y={y + 3}
+        y={y}
         fontSize="0.75rem"
         fontWeight="500"
         className="recharts-text recharts-polar-angle-axis-tick-value"
         textAnchor={textAnchor}
       >
         <tspan x={x} style={{ fill: "white" }}>
-          {payload.value}
+          {payload?.value}
         </tspan>
       </text>
     </g>
@@ -55,20 +61,8 @@ export default function PerformanceChart() {
   );
 }
 
-/**
- * @typedef customTickProps
- * @type {Object}
- * @property {Object} payload
- * @property {string} textAnchor
- * @property {string} stroke
- */
 CustomTick.propTypes = {
-  payload: PropTypes.shape({
-    coordinate: PropTypes.number,
-    value: PropTypes.string,
-    index: PropTypes.number,
-    offest: PropTypes.number,
-  }),
+  payload: PropTypes.object,
   x: PropTypes.number,
   y: PropTypes.number,
   textAnchor: PropTypes.string,

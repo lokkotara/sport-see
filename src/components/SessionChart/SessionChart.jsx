@@ -12,9 +12,15 @@ import {
 } from "recharts";
 import { store } from "../../providers/Store";
 
-const ToolTipContent = (props) => {
-  const { payload, active } = props;
-  if (active) {
+/**
+ * @typedef {import ("../../interfaces/interface").ToolTipContentProps} ToolTipContentProps
+ * @typedef {import ("../../interfaces/interface").CustomCursorProps} CustomCursorProps
+ * @typedef {import ("../../interfaces/interface").CustomDotProps} CustomDotProps
+ */
+
+/** @param {ToolTipContentProps} props*/
+const ToolTipContent = ({ payload, active }) => {
+  if (payload && active) {
     return (
       <div className="tooltipContainer">
         <span className="tooltip">
@@ -26,23 +32,29 @@ const ToolTipContent = (props) => {
   return null;
 };
 
-const CustomCursor = (props) => {
-  const { width, height, points } = props;
-  const formattedWidth = width - (points[0].x - 15);
-  return (
-    <Rectangle
-      x={points[0].x}
+/** @param {CustomCursorProps} props*/
+const CustomCursor = ({ width, height, points }) => {
+  let formattedWidth;
+  let x;
+  if (width && points && height) {
+    formattedWidth = width - (points[0].x - 15);
+    x= points[0].x;
+    height = height + 40;
+  }
+    return (
+      <Rectangle
+      x={x}
       y={0}
       width={formattedWidth}
-      height={height + 40}
+      height={height}
       fill="black"
       opacity={0.1}
-    />
-  );
+      />
+      );
 };
 
-const CustomDot = (props) => {
-  const { cx, cy, stroke } = props;
+/** @param {CustomDotProps} props*/
+const CustomDot = ({ cx, cy, stroke }) => {
   return (
     <g>
       <circle cx={cx} cy={cy} r={4} fill={stroke} />
@@ -92,22 +104,19 @@ export default function SessionChart() {
   );
 }
 
-// /**
-//  * @typedef ToolTipContentProps
-//  * @type {Object} @property {Object} payload @property {Boolean} active
-// */
 ToolTipContent.propTypes = {
-  props: PropTypes.func
+  payload: PropTypes.array,
+  active: PropTypes.bool,
 };
 
 CustomCursor.propTypes = {
-  props: PropTypes.func,
+  width: PropTypes.number,
+  height: PropTypes.number,
+  points: PropTypes.array,
 };
 
 CustomDot.propTypes = {
-  props: PropTypes.shape({
-    cx: PropTypes.number.isRequired,
-    cy: PropTypes.number.isRequired,
-    stroke: PropTypes.string.isRequired,
-  }),
+    cx: PropTypes.number,
+    cy: PropTypes.number,
+    stroke: PropTypes.string,
 };

@@ -2,10 +2,15 @@ import "./NavBar.scss";
 import PropTypes from "prop-types";
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import { isMocked as isMockedFunction } from "../../services/actions";
+import { isMocked as isMockedFunction } from "../../services/mocked";
 import { store } from "../../providers/Store";
 import { useState } from "react";
 
+/**
+ * @typedef {import ("../../interfaces/interface").navProps} navProps
+ */
+
+/** @param {navProps} props*/
 export default function NavBar({ side }) {
   const [isMocked] = useState(isMockedFunction);
   let { id } = useParams();

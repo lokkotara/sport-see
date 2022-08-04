@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 /**
  * contain all global values and method in order to update
  * @typedef  {Object}   storage
@@ -9,6 +7,10 @@
 
 import React from "react";
 import data from "../datas/default";
+
+/**
+ * @typedef {import ("../interfaces/interface").NewData} NewData
+ */
 
 const StoreContext = React.createContext(data);
 
@@ -20,23 +22,31 @@ const store = {
   set: () => {},
 };
 
-function StoreProvider({ children }) {
-  const [get, set] = React.useState(data);
-  store.get = get;
-  store.set = (newData) => update(newData);
 
-  function update(newData) {
-    set({
-      ...get,
-      ...newData,
-    });
-  }
 
-  return (
-    <StoreContext.Provider value={[get, update]}>
-      {children}
-    </StoreContext.Provider>
-  );
-}
+
+const StoreProvider = ({ children }) => {
+    const [get, set] = React.useState(data);
+    store.get = get;
+    /**
+     * @param {React.SetStateAction<NewData>} newData
+     */
+    store.set = (newData) => update(newData);
+    
+    const update = newData => {
+      set({
+        ...get,
+        ...newData,
+      });
+    };
+
+    return (
+      <StoreContext.Provider 
+// @ts-ignore
+      value={[get, update]}>
+        {children}
+      </StoreContext.Provider>
+    );
+};
 
 export { StoreProvider, StoreContext, store };
