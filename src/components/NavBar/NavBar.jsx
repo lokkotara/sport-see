@@ -24,7 +24,7 @@ export default function NavBar({ side }) {
     if (side === "top")
       return (
         <div>
-          <img src="/images/logo.svg" alt="logo de SportSee"></img>
+          <Link to={`/user/${id}`}><img src="/images/logo.svg" alt="logo de SportSee"></img></Link>
           {isMocked ? displayMocked() : null}
         </div>
       );
@@ -43,13 +43,9 @@ export default function NavBar({ side }) {
     if (side === "top")
       return (
         <ul className="navBarLinks">
-          <li>
-            <Link to={`/user/${id}`}>Accueil</Link>
-          </li>
+          <li>Accueil</li>
           <li>Profil</li>
-          <li>
-            <Link to="/Error">Réglage</Link>
-          </li>
+          <li>Réglage</li>
           <li>Communauté</li>
         </ul>
       );
