@@ -1,5 +1,7 @@
 import "./ActivityChart.scss";
+import PropTypes from "prop-types";
 import React from "react";
+import { store } from "../../providers/Store";
 import {
   BarChart,
   Bar,
@@ -9,9 +11,8 @@ import {
   Legend,
   ResponsiveContainer,
   Tooltip,
-  Rectangle
+  Rectangle,
 } from "recharts";
-import { store } from "../../providers/Store";
 
 const CustomToolTip = ({ active, payload }) => {
   if (active && payload && payload.length) {
@@ -24,6 +25,7 @@ const CustomToolTip = ({ active, payload }) => {
   }
   return null;
 };
+
 const CustomCursor = (props) => {
   const { x, y, width, height } = props;
   return (
@@ -121,3 +123,26 @@ export default function ActivityChart() {
     </div>
   );
 }
+
+CustomToolTip.propTypes = {
+  active: PropTypes.bool,
+  payload: PropTypes.array,
+};
+
+CustomCursor.propTypes = {
+  props: PropTypes.shape({
+    x: PropTypes.number,
+    y: PropTypes.number,
+    width: PropTypes.number,
+    height: PropTypes.number,
+  }),
+};
+
+// ActivityChart.propTypes = {
+//   sessions: PropTypes.shape({
+//       day: PropTypes.string.isRequired,
+//       kilogram: PropTypes.number.isRequired,
+//       calories: PropTypes.number.isRequired,
+//     }),
+//   formatXAxis: PropTypes.func,
+// };
