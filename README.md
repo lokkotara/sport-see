@@ -7,15 +7,15 @@
 To install the backend, go to [this repository](https://github.com/OpenClassrooms-Student-Center/P9-front-end-dashboard) and follow the instructions to install.
 
 To install the frontend, please clone this repository into your computer.  
-You can then install the dependancies by positioning yourself at the root of the project and typing the command `npm install` in the console.  
+You can then install the dependancies by positioning yourself at the root of the project and typing the command `npm install` in the terminal.  
 
 
 ## How to launch the project
 
 Once the project is installed, first launch the backend by positioning yourself at the root of its directory and typing `npm start`.  
-A message saying `Magic happens on port 3000` should appear in the console to confirm successful launch.
+A message saying `Magic happens on port 3000` should appear in the terminal to confirm successful launch.
 
-Then, position yourself at the root of the front folder and type `npm start` in the console.  
+Then, position yourself at the root of the frontend folder and type `npm start` in the terminal.  
 A message tells you that port 3000 is already in use and asks if you want to use another one.  
 Then type the `y` key to accept. 
 
