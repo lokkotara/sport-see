@@ -2,40 +2,40 @@
 
 # SportSee
 
-## Comment installer le projet
+## How to install the project
 
-Pour installer le back, rendez-vous sur [ce repo](https://github.com/OpenClassrooms-Student-Center/P9-front-end-dashboard) et suivez les instructions pour procéder à l'installation.
+To install the backend, go to [this repository](https://github.com/OpenClassrooms-Student-Center/P9-front-end-dashboard) and follow the instructions to install.
 
-Pour installer le front, clonez ce repo sur votre ordinateur.  
-Vous pouvez ensuite installer les dépendances en vous positionnant à la racine du projet et en tapant la commande `npm install` dans la console.  
-
-
-## Comment lancer le projet
-
-Une fois le projet installé, lancez d'abord le back en vous positionnant à la racine et en tapant `npm start`.  
-Un message indiquant `Magic happens on port 3000` doit s'afficher dans la console pour confirmer la réussite du lancement.
-
-Ensuite, positionnez vous à la racine du dossier du front et taper `npm start` dans la console.  
-Un message dans la console vous indique que le port 3000 est déjà utilisé et vous demande si vous souhaitez en utiliser un autre.  
-Tapez alors la touche `y` pour accepter. 
-
-Une fenêtre de navigation s'ouvre et vous avez à présent accès à l'application web.  
+To install the frontend, please clone this repository into your computer.  
+You can then install the dependancies by positioning yourself at the root of the project and typing the command `npm install` in the console.  
 
 
-## Concernant cette première version du projet
+## How to launch the project
 
-Cette application étant encore en phase de développement, nous avons la possibilité de récupérer les infos de l'utilisateur par 2 méthodes :
-- Un appel à l'API
-- les données mockées
+Once the project is installed, first launch the backend by positioning yourself at the root of its directory and typing `npm start`.  
+A message saying `Magic happens on port 3000` should appear in the console to confirm successful launch.
 
-Pour le moment, seuls deux utilisateurs sont présents pour ces 2 méthodes. Leurs ids sont `12` et `18`.
+Then, position yourself at the root of the front folder and type `npm start` in the console.  
+A message tells you that port 3000 is already in use and asks if you want to use another one.  
+Then type the `y` key to accept. 
 
-Aucun système d'authentification n'est encore en place sur ce projet.  
-Lors du lancement du projet, vous pouvez constater que le système de routage redirige l'utilisateur sur la page d'erreur.  
-C'est tout à fait normal puisqu'aucun utilisateur n'a encore été précisé. 
+A browser window opens and you now have access to the web application.  
 
-Pour rectifier cela, il suffit de modifier l'URL en ajoutant `/user/` ainsi que l'id de l'utilisateur désiré puis lancer la recherche.  
-Par exemple, pour afficher les informations de Cecilia lorsque le front est lancé sur le port 3001, vous pouvez taper `http://localhost:3001/user/18`.
 
-Si l'on souhaite plutôt consulter les données mockées, il suffit de rajouter `?mocked` après l'id de l'utilisateur.  
-Pour reprendre l'exemple juste au-dessus, cela donnerait `http://localhost:3001/user/18?mocked`.
+## About this first version of the project
+
+As this application is still in the development phase, we have the possibility of retrieving user information by 2 methods:
+- A call to the API
+- mocked data
+
+For the moment, only two users are present for these 2 methods. Their ids are `12` and `18`.
+
+No authentication system is yet in place on this project.
+When launching the project, you can see that the routing system redirects the user to the error page.
+This is completely normal since no user has yet been specified.
+
+To rectify this, simply modify the URL by adding `/user/` as well as the id of the desired user then launch the search.
+For example, to display Cecilia's information when the front is launched on port 3001, you can type `http://localhost:3001/user/18`.
+
+If you want to view the mocked data instead, just add `?mocked` after the user's id.
+Using the example just above, this would result in `http://localhost:3001/user/18?mocked`.
