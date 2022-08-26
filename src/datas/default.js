@@ -7,18 +7,18 @@ const data = {
       lastName: "",
       age: 0,
     },
-    todayScore: 0, //un nombre entree 0 et 1
+    todayScore: 0, //un nombre entre 0 et 1
     keyData: {
       calorieCount: 0,
       proteinCount: 0,
       carbohydrateCount: 0,
       lipidCount: 0,
     },
-    todayScoreDatas: {
+    todayScoreDatas: [{
       name: 'Cecilia',
       score: 0.12,
       fill: 'red',
-  },
+  }],
   },
   USER_ACTIVITY: {
     sessions: [

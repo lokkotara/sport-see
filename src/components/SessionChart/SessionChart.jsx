@@ -10,12 +10,12 @@ import {
   ResponsiveContainer,
   Rectangle,
 } from "recharts";
-import { store } from "../../providers/Store";
 
 /**
  * @typedef {import ("../../interfaces/interface").ToolTipContentProps} ToolTipContentProps
  * @typedef {import ("../../interfaces/interface").CustomCursorProps} CustomCursorProps
  * @typedef {import ("../../interfaces/interface").CustomDotProps} CustomDotProps
+ * @typedef {import ("../../interfaces/interface").userSessionsObject} userSessionsObject
  */
 
 /** @param {ToolTipContentProps} props*/
@@ -63,13 +63,18 @@ const CustomDot = ({ cx, cy, stroke }) => {
   );
 };
 
-export default function SessionChart() {
+/**
+ * Allows you to create a line chart with the data passed as a parameter
+ * @param {userSessionsObject} sessions An object containing the user's sessions
+ * @returns {JSX.Element} 
+ */
+export default function SessionChart({sessions}) {
   return (
     <div className="sessionChart chart">
       <div className="sessionChartTitle">Durée moyenne des sessions</div>
       <ResponsiveContainer width={'99%'}>
         <LineChart
-          data={store.get.USER_AVERAGE_SESSIONS}
+          data={sessions}
           margin={{
             top: 0,
             right: 0,
@@ -120,3 +125,7 @@ CustomDot.propTypes = {
     cy: PropTypes.number,
     stroke: PropTypes.string,
 };
+
+SessionChart.propTypes = {
+  sessions: PropTypes.array.isRequired,
+}

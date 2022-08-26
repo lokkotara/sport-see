@@ -9,10 +9,10 @@ import {
   ResponsiveContainer,
   PolarRadiusAxis,
 } from "recharts";
-import { store } from "../../providers/Store";
 
 /**
  * @typedef {import ("../../interfaces/interface").customTickProps} customTickProps
+ * @typedef {import ("../../interfaces/interface").userPerformanceData} userPerformanceData
  */
 
 /** @param {customTickProps} props*/
@@ -36,11 +36,16 @@ const CustomTick = ({ payload, x, y, textAnchor, stroke }) => {
   );
 };
 
-export default function PerformanceChart() {
+/**
+ * Allows you to create a spiderweb chart with the data passed as a parameter
+ * @param {userPerformanceData} data An object containing the user's data
+ * @returns {JSX.Element}
+ */
+export default function PerformanceChart({data}) {
   return (
     <div className="performanceChart chart">
       <ResponsiveContainer width={'99%'}>
-        <RadarChart outerRadius={85} data={store.get.USER_PERFORMANCE.data}>
+        <RadarChart outerRadius={85} data={data}>
           <PolarGrid radialLines={false} />
           <PolarAngleAxis
             dataKey="kind"
@@ -68,3 +73,7 @@ CustomTick.propTypes = {
   textAnchor: PropTypes.string,
   stroke: PropTypes.string,
 };
+
+PerformanceChart.propTypes = {
+  data: PropTypes.array.isRequired
+}
