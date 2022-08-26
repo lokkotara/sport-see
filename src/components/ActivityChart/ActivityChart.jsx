@@ -1,7 +1,6 @@
 import "./ActivityChart.scss";
 import PropTypes from "prop-types";
 import React from "react";
-import { store } from "../../providers/Store";
 import {
   BarChart,
   Bar,
@@ -17,6 +16,7 @@ import {
 /**
  * @typedef {import ("../../interfaces/interface").customToolTipProps} customToolTipProps
  * @typedef {import ("../../interfaces/interface").customCursorProps} customCursorProps
+ * @typedef {import ("../../interfaces/interface").userActivityObject} userActivityObject
  */
 
 /** @param {customToolTipProps} props*/
@@ -48,7 +48,12 @@ const CustomCursor = ({ x, y, width, height }) => {
   );
 };
 
-export default function ActivityChart() {
+/**
+ * Allows you to create a bar chart with the data passed as a parameter
+ * @param {userActivityObject} sessions An object containing the user's sessions
+ * @returns {JSX.Element} 
+ */
+export default function ActivityChart({sessions}) {
   const formatXAxis = (i) => i + 1;
 
   return (
@@ -56,7 +61,7 @@ export default function ActivityChart() {
       <span className="activityTitle">Activité quotidienne</span>
       <ResponsiveContainer width={'99%'} >
         <BarChart
-          data={store.get.USER_ACTIVITY.sessions}
+          data={sessions}
           margin={{ top: 65, right: 30, bottom: 10, left: -20 }}
           barGap={8}
         >
@@ -116,10 +121,9 @@ export default function ActivityChart() {
             wrapperStyle={{ top: 0, right: 16 }}
           />
           <Tooltip
-            label={store.get.USER_ACTIVITY.sessions}
+            label={sessions}
             cursor={<CustomCursor width={120}/>}
             wrapperStyle={{ top: -40 }}
-            labelStyle={{ backgroundColor: "green" }}
             content={<CustomToolTip active={false}/>}
             offset={35}
           />
@@ -140,3 +144,7 @@ CustomCursor.propTypes = {
     width: PropTypes.number.isRequired,
     height: PropTypes.number,
 };
+
+ActivityChart.propTypes = {
+    sessions: PropTypes.array.isRequired
+}

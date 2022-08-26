@@ -9,6 +9,10 @@
  * @property {KeyData} keyData
  * @property {Array.<ScoreDatas>} [todayScoreDatas]
  * @property {number} todayScore
+ * 
+ * @typedef {Object} userInfosProps
+ * @property {Array.<ScoreDatas>} todayScoreDatas
+ * @property {number} todayScore
  *
  * @typedef {Object} UserInfos
  * @property {String} firstName
@@ -29,6 +33,9 @@
  * @typedef {Object} userPerformanceObject
  * @property {Number} userId
  * @property {{1:String, 2:String, 3:String, 4:String, 5:String, 6:String}} kind
+ * @property {Array.<dataObject>} data
+ * 
+ * @typedef {Object} userPerformanceData
  * @property {Array.<dataObject>} data
  *
  * @typedef {Object} dataObject

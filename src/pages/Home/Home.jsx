@@ -24,10 +24,10 @@ export default function Home() {
   const showCharts = () => {
     return (
       <React.Fragment>
-        <ActivityChart />
-        <SessionChart />
-        <ScoreChart />
-        <PerformanceChart />
+        <ActivityChart sessions={store.USER_ACTIVITY.sessions}/>
+        <SessionChart sessions={store.USER_AVERAGE_SESSIONS}/>
+        <ScoreChart todayScore={store.USER_MAIN_DATA.todayScore} todayScoreDatas={store.USER_MAIN_DATA.todayScoreDatas}/>
+        <PerformanceChart data={store.USER_PERFORMANCE.data}/>
       </React.Fragment>
     );
   };
