@@ -65,7 +65,7 @@ const CustomDot = ({ cx, cy, stroke }) => {
 
 /**
  * Allows you to create a line chart with the data passed as a parameter
- * @param {userSessionsObject} sessions An object containing the user's sessions
+ * @param {userSessionsObject} props An object containing the user's sessions
  * @returns {JSX.Element} 
  */
 export default function SessionChart({sessions}) {

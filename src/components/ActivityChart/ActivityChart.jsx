@@ -50,7 +50,7 @@ const CustomCursor = ({ x, y, width, height }) => {
 
 /**
  * Allows you to create a bar chart with the data passed as a parameter
- * @param {userActivityObject} sessions An object containing the user's sessions
+ * @param {userActivityObject} props An object containing the user's sessions
  * @returns {JSX.Element} 
  */
 export default function ActivityChart({sessions}) {

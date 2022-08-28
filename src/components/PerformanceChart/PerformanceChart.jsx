@@ -38,7 +38,7 @@ const CustomTick = ({ payload, x, y, textAnchor, stroke }) => {
 
 /**
  * Allows you to create a spiderweb chart with the data passed as a parameter
- * @param {userPerformanceData} data An object containing the user's data
+ * @param {userPerformanceData} props An object containing the user's data
  * @returns {JSX.Element}
  */
 export default function PerformanceChart({data}) {
